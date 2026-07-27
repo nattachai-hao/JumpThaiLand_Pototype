@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "JUMP English",
+    "slug": "jump-english",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#F6F7FB"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "อนุญาตให้ JUMP English แปลงเสียงพูดเป็นข้อความ",
+        "NSMicrophoneUsageDescription": "อนุญาตให้ JUMP English ใช้ไมโครโฟนเพื่อฝึกพูดภาษาอังกฤษ"
+      },
+      "bundleIdentifier": "com.anonymous.jump-english"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#101828"
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      "./plugins/withFmtXcode26Fix",
+      [
+        "expo-speech-recognition",
+        {
+          "microphonePermission": "อนุญาตให้ JUMP English ใช้ไมโครโฟนเพื่อฝึกพูดภาษาอังกฤษ",
+          "speechRecognitionPermission": "อนุญาตให้ JUMP English แปลงเสียงพูดเป็นข้อความ"
+        }
+      ]
+    ]
+  }
+}

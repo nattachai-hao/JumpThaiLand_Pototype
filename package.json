@@ -1,0 +1,22 @@
+{
+  "name": "jump-thailand",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently --kill-others-on-fail --handle-input --default-input-target mobile --names api,mobile --prefix-colors blue,magenta \"npm:dev:api\" \"npm:dev:mobile\"",
+    "dev:ios": "concurrently --kill-others-on-fail --names api,ios --prefix-colors blue,magenta \"npm:dev:api\" \"npm run ios --workspace @jump-thailand/mobile\"",
+    "dev:api": "npm run dev --workspace @jump-thailand/api",
+    "dev:mobile": "npm run start --workspace @jump-thailand/mobile",
+    "ios:device": "npm run ios:device --workspace @jump-thailand/mobile",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
