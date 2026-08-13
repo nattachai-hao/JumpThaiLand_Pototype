@@ -11,6 +11,9 @@ enum Scenario {
   CAFE
   TRAVEL
   INTERVIEW
+  DINNER
+  MEETING
+  DIRECTIONS
 }
 
 enum ConversationStatus {

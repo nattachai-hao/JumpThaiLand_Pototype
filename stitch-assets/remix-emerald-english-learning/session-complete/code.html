@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Session Complete - JUMP English</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#0d631b",
+                    "on-surface": "#191c1b",
+                    "tertiary": "#4d5950",
+                    "surface-variant": "#e1e3e1",
+                    "outline-variant": "#bfcaba",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#a3f69c",
+                    "inverse-on-surface": "#eff1ef",
+                    "on-tertiary-container": "#e8f5e9",
+                    "outline": "#707a6c",
+                    "tertiary-container": "#657167",
+                    "tertiary-fixed": "#d9e6da",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e1e3e1",
+                    "on-tertiary-fixed": "#131e17",
+                    "surface-container": "#eceeec",
+                    "on-secondary-fixed": "#002109",
+                    "secondary": "#3c6842",
+                    "tertiary-fixed-dim": "#bdcabe",
+                    "surface-dim": "#d8dad9",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#1b6d24",
+                    "inverse-surface": "#2e3130",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002204",
+                    "on-surface-variant": "#40493d",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#24502c",
+                    "surface-bright": "#f8faf8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#426e47",
+                    "primary-fixed-dim": "#88d982",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#bdefbe",
+                    "on-primary-container": "#cbffc2",
+                    "surface": "#f8faf8",
+                    "on-background": "#191c1b",
+                    "on-primary-fixed-variant": "#005312",
+                    "surface-container-low": "#f2f4f2",
+                    "secondary-fixed-dim": "#a2d3a4",
+                    "surface-container-high": "#e6e9e7",
+                    "secondary-fixed": "#bdefbe",
+                    "background": "#f8faf8",
+                    "on-tertiary-fixed-variant": "#3e4a41",
+                    "inverse-primary": "#88d982",
+                    "primary-container": "#2e7d32"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-max-width": "1280px",
+                    "gutter": "24px",
+                    "container-margin": "24px",
+                    "base": "8px",
+                    "section-gap": "64px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8faf8;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 1s ease-in-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .confetti-canvas {
+            pointer-events: none;
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+        }
+        .custom-shadow {
+            box-shadow: 0 30px 60px -15px rgba(46, 125, 50, 0.08);
+        }
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, #0d631b 0%, #2e7d32 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-[20px] border-b border-white/40 shadow-[0_30px_60px_-15px_rgba(46,125,50,0.08)] flex justify-between items-center h-16 px-gutter">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="school">school</span>
+<span class="text-headline-md font-headline-md font-bold text-primary tracking-tight">JUMP English</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-secondary-container rounded-full">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="stars" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-label-md font-label-md text-on-secondary-container">1,250 pts</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-gutter max-w-desktop-max-width mx-auto">
+<!-- Hero Section -->
+<section class="relative flex flex-col items-center text-center mb-section-gap overflow-hidden py-8">
+<canvas class="confetti-canvas" id="confetti"></canvas>
+<div class="mb-6 inline-flex items-center justify-center w-24 h-24 bg-primary-fixed rounded-full shadow-lg">
+<span class="material-symbols-outlined text-on-primary-fixed text-5xl" data-icon="celebration" style="font-variation-settings: 'FILL' 1;">celebration</span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-primary mb-2 animate-bounce">Well Done!</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-lg">You've successfully completed your English immersion session. Your progress today is remarkable!</p>
+</section>
+<!-- Bento Grid for Stats and Feedback -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Circular Progress Section -->
+<div class="md:col-span-8 glass p-gutter rounded-3xl custom-shadow">
+<h3 class="text-headline-md font-headline-md text-on-surface mb-8">Performance Summary</h3>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-8 justify-items-center">
+<!-- Grammar Circle -->
+<div class="flex flex-col items-center gap-4 group">
+<div class="relative flex items-center justify-center">
+<svg class="w-32 h-32">
+<circle class="text-surface-container stroke-current" cx="64" cy="64" fill="transparent" r="54" stroke-width="10"></circle>
+<circle class="progress-ring__circle text-primary stroke-current" cx="64" cy="64" fill="transparent" r="54" stroke-dasharray="339.29" stroke-dashoffset="67.85" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<span class="absolute text-headline-md font-headline-md text-primary">80%</span>
+</div>
+<div class="text-center">
+<p class="text-label-md font-label-md text-on-surface-variant">Grammar</p>
+<span class="text-label-sm font-label-sm text-primary">+5% today</span>
+</div>
+</div>
+<!-- Vocabulary Circle -->
+<div class="flex flex-col items-center gap-4 group">
+<div class="relative flex items-center justify-center">
+<svg class="w-32 h-32">
+<circle class="text-surface-container stroke-current" cx="64" cy="64" fill="transparent" r="54" stroke-width="10"></circle>
+<circle class="progress-ring__circle text-primary stroke-current" cx="64" cy="64" fill="transparent" r="54" stroke-dasharray="339.29" stroke-dashoffset="33.92" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<span class="absolute text-headline-md font-headline-md text-primary">90%</span>
+</div>
+<div class="text-center">
+<p class="text-label-md font-label-md text-on-surface-variant">Vocabulary</p>
+<span class="text-label-sm font-label-sm text-primary">+12% today</span>
+</div>
+</div>
+<!-- Communication Circle -->
+<div class="flex flex-col items-center gap-4 group">
+<div class="relative flex items-center justify-center">
+<svg class="w-32 h-32">
+<circle class="text-surface-container stroke-current" cx="64" cy="64" fill="transparent" r="54" stroke-width="10"></circle>
+<circle class="progress-ring__circle text-primary stroke-current" cx="64" cy="64" fill="transparent" r="54" stroke-dasharray="339.29" stroke-dashoffset="101.78" stroke-linecap="round" stroke-width="10"></circle>
+</svg>
+<span class="absolute text-headline-md font-headline-md text-primary">70%</span>
+</div>
+<div class="text-center">
+<p class="text-label-md font-label-md text-on-surface-variant">Communication</p>
+<span class="text-label-sm font-label-sm text-primary">+2% today</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Session Details Sidebar -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<div class="glass p-6 rounded-3xl custom-shadow flex-1">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="timer">timer</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Time Spent</p>
+<p class="text-headline-md font-headline-md text-on-surface">45m 20s</p>
+</div>
+</div>
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="auto_stories">auto_stories</span>
+</div>
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Words Mastered</p>
+<p class="text-headline-md font-headline-md text-on-surface">24 New</p>
+</div>
+</div>
+</div>
+<div class="relative rounded-3xl overflow-hidden aspect-video custom-shadow">
+<img class="w-full h-full object-cover" data-alt="A lush, serene landscape featuring a winding path through an emerald green forest with soft morning sunlight filtering through the canopy, symbolizing a peaceful learning journey and growth, in a high-key modern photographic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHnBxaKoW9QnqBn-jKp02tplYBPHfRFYxddzyj9-Pl9Uu9WDXKxKhYHlldYkJk53k094I7YU9_RJ2Naj77GM3ww187-CZ-f95j9EkekItFczhfZtFXDQHplEBunSn_oBQ1DpzrfSQdx3tVy4dWrBnC-qU841G0dq7iaY9bM5WwiIP13imn1-L2I0YhuyNdDq7JNFRxrbiwHoftIyHka7hXkVipUceQBjHz-yS2k4cHPfSRz4rnuHPs0A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+<span class="text-white text-label-md font-label-md">Topic: Travel &amp; Exploration</span>
+</div>
+</div>
+</div>
+<!-- Coach Feedback Section -->
+<div class="md:col-span-12 bg-[#E8F5E9] rounded-3xl p-gutter custom-shadow flex flex-col md:flex-row gap-8 items-center border border-primary/10">
+<div class="relative">
+<div class="w-24 h-24 rounded-full border-4 border-white overflow-hidden shadow-md">
+<img class="w-full h-full object-cover" data-alt="A professional and friendly English language tutor with a warm smile, wearing a modern smart-casual outfit, positioned against a bright, minimalist studio background with soft green accent lighting, conveying approachability and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxaBu8CfVye63KX6UV7tfbooNQFWKoRZou4ZDCIA1lo-AUKS4rGeyD0DszsRXl2A5B2rKmySI-LnsLLn49H4E7PxZuH3dLC6zJSpy6AkArMYNcxV7ru5tfeoArSs5eUYSJWKTOiStvyCBstXJys0aiHdiL32J79koYTTGDE7u6rGvPcgRIJtm0DAxsbTiM42S9Ybn1JTOTp_obA2cZ9oV49e31KWa68F_KWWm0ylAZBd2wwkytJgfsog"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-primary text-white p-1 rounded-full border-2 border-white">
+<span class="material-symbols-outlined text-xs" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h4 class="text-headline-md font-headline-md text-primary mb-2">Coach feedback</h4>
+<p class="text-body-md font-body-md text-tertiary-container italic leading-relaxed">
+                        "Your use of conditional tenses today was a major step up! You handled the 'Business Negotiations' scenario with great confidence. Focus more on your intonation during questions for that extra bit of natural fluency. Keep it up!"
+                    </p>
+</div>
+<button class="px-6 py-3 rounded-full bg-white text-primary font-label-md border border-primary/20 hover:bg-primary/5 transition-colors shadow-sm whitespace-nowrap active:scale-95 duration-200">
+                    Full Report
+                </button>
+</div>
+</div>
+<!-- Footer Action -->
+<div class="mt-section-gap flex flex-col items-center gap-4">
+<button class="w-full max-w-sm h-14 bg-gradient-primary text-on-primary rounded-full font-label-md text-lg shadow-lg hover:shadow-primary/20 transition-all active:scale-95 duration-200 flex items-center justify-center gap-2">
+                Next Steps
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors">
+                Back to Dashboard
+            </button>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-white/85 backdrop-blur-[20px] border-t border-white/40 shadow-[0_-10px_40px_-15px_rgba(46,125,50,0.08)] rounded-t-xl flex justify-around items-center h-20 pb-safe">
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="menu_book" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-label-sm font-label-sm">Lessons</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+<span class="text-label-sm font-label-sm">Tutor</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:text-primary transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined" data-icon="style">style</span>
+<span class="text-label-sm font-label-sm">Flashcards</span>
+</div>
+</nav>
+<script>
+        // Simple Confetti Animation
+        const canvas = document.getElementById('confetti');
+        const ctx = canvas.getContext('2d');
+        let pieces = [];
+        const numberOfPieces = 50;
+        const lastUpdateTime = Date.now();
+
+        function updateCanvasSize() {
+            canvas.width = window.innerWidth;
+            canvas.height = 400;
+        }
+
+        class Piece {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.rotation = Math.random() * 360;
+                this.color = ['#0d631b', '#2e7d32', '#a3f69c', '#bdefbe'][Math.floor(Math.random() * 4)];
+                this.size = Math.random() * 10 + 5;
+                this.speed = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.y += this.speed;
+                this.rotation += this.speed;
+                if (this.y > canvas.height) {
+                    this.y = -20;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.fillStyle = this.color;
+                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function init() {
+            updateCanvasSize();
+            for (let i = 0; i < numberOfPieces; i++) {
+                pieces.push(new Piece());
+            }
+            requestAnimationFrame(animate);
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pieces.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', updateCanvasSize);
+        init();
+
+        // Initial Progress Ring Animation
+        document.querySelectorAll('.progress-ring__circle').forEach(circle => {
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            const offset = circle.getAttribute('stroke-dashoffset');
+            circle.style.strokeDashoffset = circumference;
+            setTimeout(() => {
+                circle.style.strokeDashoffset = offset;
+            }, 500);
+        });
+    </script>
+</body></html>

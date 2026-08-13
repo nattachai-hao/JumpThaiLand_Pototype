@@ -57,6 +57,27 @@ const scenarios: Array<{
     subtitle: "แนะนำตัวและเล่าประสบการณ์ทำงาน",
     level: "Intermediate",
   },
+  {
+    id: "dinner",
+    emoji: "🍽️",
+    title: "Ordering Dinner",
+    subtitle: "สั่งอาหารและสอบถามเมนูในร้านอาหาร",
+    level: "Beginner",
+  },
+  {
+    id: "meeting",
+    emoji: "👥",
+    title: "Project Meeting",
+    subtitle: "อัปเดตงานและแลกเปลี่ยนความคิดเห็นในทีม",
+    level: "Advanced",
+  },
+  {
+    id: "directions",
+    emoji: "🗺️",
+    title: "Asking Directions",
+    subtitle: "ถามทางและทำความเข้าใจเส้นทาง",
+    level: "Intermediate",
+  },
 ];
 
 type Screen = "home" | "chat" | "feedback" | "flashcards";
@@ -67,8 +88,8 @@ export default function App() {
   const [dashboard, setDashboard] = useState<DashboardSummary>({
     completedToday: 0,
     completedScenarios: [],
-    totalScenarios: scenarios.length,
-    remainingToday: scenarios.length,
+    totalScenarios: 3,
+    remainingToday: 3,
     progressPercent: 0,
     points: 0,
     canClaimPoints: false,
@@ -295,41 +316,41 @@ export default function App() {
         <ScrollView contentContainerStyle={styles.home}>
           <View style={styles.brandRow}>
             <View style={styles.logo}>
-              <Text style={styles.logoText}>J</Text>
+              <Text style={styles.logoText}>◇</Text>
             </View>
             <Text style={styles.brand}>JUMP English</Text>
             <View style={styles.pointsPill}>
-              <Text style={styles.pointsText}>⭐ {dashboard.points} Points</Text>
+              <Text style={styles.pointsText}>♙ {dashboard.points} pts</Text>
             </View>
           </View>
 
+          <View style={styles.welcome}>
+            <Text style={styles.welcomeTitle}>Hello, Alex!</Text>
+            <Text style={styles.welcomeText}>
+              You're making great progress. Ready to jump in?
+            </Text>
+          </View>
+
           <View style={styles.hero}>
-            <Text style={styles.eyebrow}>DAILY DASHBOARD</Text>
-            <View style={styles.dashboardMain}>
-              <View>
-                <Text style={styles.dashboardNumber}>
-                  {dashboard.completedToday}
-                  <Text style={styles.dashboardTotal}>/{dashboard.totalScenarios}</Text>
+            <Text style={styles.dailyGoalTitle}>Daily Goal</Text>
+            <View style={styles.goalRing}>
+              <View style={styles.goalRingInner}>
+                <Text style={styles.goalFraction}>
+                  {dashboard.completedToday}/{dashboard.totalScenarios}
                 </Text>
-                <Text style={styles.dashboardLabel}>หัวข้อที่ทำเสร็จวันนี้</Text>
-              </View>
-              <View style={styles.dashboardRemaining}>
-                <Text style={styles.remainingNumber}>{dashboard.remainingToday}</Text>
-                <Text style={styles.remainingLabel}>หัวข้อที่เหลือ</Text>
+                <Text style={styles.goalTopics}>Topics</Text>
               </View>
             </View>
-            <View style={styles.progressTrack}>
-              <View
-                style={[
-                  styles.progressFill,
-                  { width: `${dashboard.progressPercent}%` },
-                ]}
-              />
-            </View>
-            <View style={styles.dashboardFooter}>
-              <Text style={styles.progressText}>ความคืบหน้าประจำวัน</Text>
-              <Text style={styles.progressPercent}>{dashboard.progressPercent}%</Text>
-            </View>
+            <Text style={styles.goalMessage}>
+              {dashboard.remainingToday} more topics to hit your daily streak!
+            </Text>
+            <Pressable
+              style={[styles.continueButton, loading && styles.disabled]}
+              onPress={() => begin("cafe")}
+              disabled={loading}
+            >
+              <Text style={styles.continueButtonText}>Continue Learning</Text>
+            </Pressable>
             {dashboard.canClaimPoints && (
               <Pressable
                 style={[styles.claimButton, loading && styles.disabled]}
@@ -343,11 +364,51 @@ export default function App() {
             )}
           </View>
 
-          {dashboard.remainingToday > 0 && (
+          <View style={styles.streakCard}>
+            <View style={styles.streakHeader}>
+              <Text style={styles.streakLabel}>WEEKLY STREAK</Text>
+              <Text style={styles.streakCount}>♨ 12 Days</Text>
+            </View>
+            <View style={styles.streakDays}>
+              {["Mon", "Tue", "Today", "Thu"].map((day, index) => (
+                <View style={styles.streakDay} key={day}>
+                  <View
+                    style={[
+                      styles.dayDot,
+                      index < 2 && styles.dayDotDone,
+                      index === 2 && styles.dayDotToday,
+                    ]}
+                  >
+                    <Text style={index < 2 ? styles.dayCheck : styles.dayText}>
+                      {index < 2
+                        ? "✓"
+                        : index === 2
+                          ? `${dashboard.completedToday}/${dashboard.totalScenarios}`
+                          : ""}
+                    </Text>
+                  </View>
+                  <Text style={styles.dayLabel}>{day}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          <Pressable style={styles.featuredLesson} onPress={() => begin("interview")}>
+            <Text style={styles.recommendedPill}>RECOMMENDED</Text>
+            <Text style={styles.featuredTitle}>Business Presentation</Text>
+            <Text style={styles.featuredCopy}>
+              Master the art of pitching your ideas in professional English.
+            </Text>
+            <Text style={styles.featuredAction}>Start Lesson  →</Text>
+          </Pressable>
+
+          {scenarios.some(
+            (scenario) =>
+              !dashboard.completedScenarios.includes(scenario.id),
+          ) && (
             <>
               <View style={styles.sectionTitleRow}>
-                <Text style={styles.sectionTitle}>เลือกสถานการณ์</Text>
-                <Text style={styles.sectionMeta}>ประมาณ 5 นาที</Text>
+                <Text style={styles.sectionTitle}>Scenarios</Text>
               </View>
 
               {scenarios
@@ -389,9 +450,6 @@ export default function App() {
             <>
               <View style={styles.flashcardSectionHeader}>
                 <Text style={styles.sectionTitle}>Flashcard</Text>
-                <Text style={styles.sectionMeta}>
-                  {dashboard.completedScenarios.length} สถานการณ์
-                </Text>
               </View>
               {scenarios
                 .filter((scenario) =>
@@ -550,11 +608,17 @@ export default function App() {
 
       {screen === "feedback" && feedback && (
         <ScrollView contentContainerStyle={styles.feedbackPage}>
-          <Text style={styles.feedbackEyebrow}>SESSION COMPLETE</Text>
-          <Text style={styles.feedbackTitle}>เยี่ยมมาก! 🎉</Text>
-          <Text style={styles.feedbackSubtitle}>นี่คือผลการฝึกของคุณในรอบนี้</Text>
+          <View style={styles.celebrationIcon}>
+            <Text style={styles.celebrationEmoji}>🎉</Text>
+          </View>
+          <Text style={styles.feedbackTitle}>Well Done!</Text>
+          <Text style={styles.feedbackSubtitle}>
+            You've successfully completed your English immersion session.
+            Your progress today is remarkable!
+          </Text>
 
           <View style={styles.scoreCard}>
+            <Text style={styles.performanceTitle}>Performance Summary</Text>
             {(
               [
                 ["Grammar", feedback.scores.grammar],
@@ -563,14 +627,17 @@ export default function App() {
               ] as const
             ).map(([label, score]) => (
               <View style={styles.scoreItem} key={label}>
-                <Text style={styles.score}>{score}</Text>
+                <View style={styles.scoreCircle}>
+                  <Text style={styles.score}>{score}%</Text>
+                </View>
                 <Text style={styles.scoreLabel}>{label}</Text>
+                <Text style={styles.scoreGain}>+5% today</Text>
               </View>
             ))}
           </View>
 
           <View style={styles.insightCard}>
-            <Text style={styles.cardLabel}>COACH FEEDBACK</Text>
+            <Text style={styles.cardLabel}>Coach feedback</Text>
             <Text style={styles.summary}>{feedback.summary}</Text>
           </View>
 
@@ -697,23 +764,51 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: "#F4FBF6" },
+  safe: { flex: 1, backgroundColor: "#F8FAF8" },
   flex: { flex: 1 },
   home: { padding: 22, paddingBottom: 48 },
-  brandRow: { flexDirection: "row", alignItems: "center", marginBottom: 24 },
+  brandRow: { flexDirection: "row", alignItems: "center", marginBottom: 36 },
   logo: {
     width: 38,
     height: 38,
     borderRadius: 13,
-    backgroundColor: "#16A34A",
+    backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "center",
   },
-  logoText: { color: "#FFFFFF", fontSize: 20, fontWeight: "900" },
-  brand: { color: "#101828", fontSize: 19, fontWeight: "800", marginLeft: 10, flex: 1 },
-  pointsPill: { backgroundColor: "#DCFCE7", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 20, borderWidth: 1, borderColor: "#86EFAC" },
-  pointsText: { color: "#15803D", fontSize: 12, fontWeight: "900" },
-  hero: { backgroundColor: "#14532D", borderRadius: 28, padding: 24, marginBottom: 28 },
+  logoText: { color: "#0D631B", fontSize: 22, fontWeight: "900" },
+  brand: { color: "#0D631B", fontSize: 20, fontWeight: "900", marginLeft: 6, flex: 1 },
+  pointsPill: { backgroundColor: "#BDEFBE", paddingHorizontal: 14, paddingVertical: 9, borderRadius: 22 },
+  pointsText: { color: "#3C6842", fontSize: 12, fontWeight: "700" },
+  welcome: { marginBottom: 34 },
+  welcomeTitle: { color: "#191C1B", fontSize: 38, lineHeight: 46, fontWeight: "900", letterSpacing: -1 },
+  welcomeText: { color: "#707A6C", fontSize: 16, lineHeight: 25, marginTop: 8, maxWidth: 330 },
+  hero: { backgroundColor: "#FFFFFF", borderRadius: 24, padding: 26, marginBottom: 24, alignItems: "center", borderWidth: 1, borderColor: "#F1F4F1" },
+  dailyGoalTitle: { color: "#191C1B", fontSize: 22, fontWeight: "800" },
+  goalRing: { width: 150, height: 150, borderRadius: 75, borderWidth: 13, borderColor: "#0D631B", borderLeftColor: "#E6E9E7", alignItems: "center", justifyContent: "center", marginTop: 28 },
+  goalRingInner: { width: 116, height: 116, borderRadius: 58, alignItems: "center", justifyContent: "center" },
+  goalFraction: { color: "#0D631B", fontSize: 38, fontWeight: "900" },
+  goalTopics: { color: "#707A6C", fontSize: 12, marginTop: -4 },
+  goalMessage: { color: "#40493D", fontSize: 15, lineHeight: 22, textAlign: "center", marginTop: 26, maxWidth: 260 },
+  continueButton: { width: "100%", backgroundColor: "#0D631B", borderRadius: 999, paddingVertical: 15, alignItems: "center", marginTop: 22 },
+  continueButtonText: { color: "#FFFFFF", fontSize: 15, fontWeight: "800" },
+  streakCard: { backgroundColor: "#FFFFFF", borderRadius: 24, padding: 24, marginBottom: 24, borderWidth: 1, borderColor: "#F1F4F1" },
+  streakHeader: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  streakLabel: { color: "#707A6C", fontSize: 11, fontWeight: "700", letterSpacing: 0.5 },
+  streakCount: { color: "#0D631B", fontSize: 13, fontWeight: "900" },
+  streakDays: { flexDirection: "row", justifyContent: "space-between", marginTop: 22 },
+  streakDay: { alignItems: "center", width: 54 },
+  dayDot: { width: 38, height: 38, borderRadius: 19, backgroundColor: "#E6E9E7", alignItems: "center", justifyContent: "center" },
+  dayDotDone: { backgroundColor: "#0D631B" },
+  dayDotToday: { backgroundColor: "#FFFFFF", borderWidth: 2, borderColor: "#0D631B", borderStyle: "dashed" },
+  dayCheck: { color: "#FFFFFF", fontSize: 17, fontWeight: "900" },
+  dayText: { color: "#0D631B", fontSize: 10, fontWeight: "900" },
+  dayLabel: { color: "#707A6C", fontSize: 10, marginTop: 7 },
+  featuredLesson: { minHeight: 190, borderRadius: 24, backgroundColor: "#2E7D32", padding: 24, marginBottom: 46, justifyContent: "flex-end", overflow: "hidden" },
+  recommendedPill: { position: "absolute", top: 18, left: 22, color: "#FFFFFF", fontSize: 10, backgroundColor: "#5E9963", paddingHorizontal: 12, paddingVertical: 6, borderRadius: 999 },
+  featuredTitle: { color: "#FFFFFF", fontSize: 23, fontWeight: "900" },
+  featuredCopy: { color: "#E8F5E9", fontSize: 14, lineHeight: 21, marginTop: 8, maxWidth: 260 },
+  featuredAction: { color: "#FFFFFF", fontSize: 14, fontWeight: "800", marginTop: 18 },
   eyebrow: { color: "#86EFAC", fontSize: 11, fontWeight: "800", letterSpacing: 1.2 },
   dashboardMain: { flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between", marginTop: 15 },
   dashboardNumber: { color: "#FFFFFF", fontSize: 48, lineHeight: 54, fontWeight: "900" },
@@ -730,8 +825,8 @@ const styles = StyleSheet.create({
   claimButton: { backgroundColor: "#FFFFFF", borderRadius: 14, paddingVertical: 12, alignItems: "center", marginTop: 16 },
   claimButtonText: { color: "#15803D", fontSize: 14, fontWeight: "900" },
   sectionTitleRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 13 },
-  sectionTitle: { color: "#0B1F14", fontSize: 20, fontWeight: "900" },
-  sectionMeta: { color: "#667085", fontSize: 12 },
+  sectionTitle: { color: "#191C1B", fontSize: 24, lineHeight: 30, fontWeight: "900", maxWidth: 200 },
+  sectionMeta: { color: "#0D631B", fontSize: 12, lineHeight: 17, textAlign: "right", fontWeight: "700" },
   scenarioCard: {
     flexDirection: "row",
     backgroundColor: "#FFFFFF",
@@ -739,14 +834,14 @@ const styles = StyleSheet.create({
     padding: 17,
     marginBottom: 13,
     borderWidth: 1,
-    borderColor: "#EAECF0",
+    borderColor: "#F1F4F1",
   },
   pressed: { opacity: 0.75, transform: [{ scale: 0.99 }] },
   scenarioIcon: {
     width: 56,
     height: 56,
     borderRadius: 18,
-    backgroundColor: "#F0FDF4",
+    backgroundColor: "#BDEFBE",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -764,6 +859,13 @@ const styles = StyleSheet.create({
   completedText: { color: "#027A48", fontSize: 10, fontWeight: "700" },
   loader: { marginTop: 14 },
   error: { color: "#D92D20", textAlign: "center", marginVertical: 10 },
+  bottomNav: { flexDirection: "row", backgroundColor: "#FFFFFF", borderRadius: 24, padding: 6, marginTop: 28, borderWidth: 1, borderColor: "#F1F4F1" },
+  navItem: { flex: 1, alignItems: "center", paddingVertical: 9 },
+  navActive: { flex: 1, alignItems: "center", paddingVertical: 9, backgroundColor: "#BDEFBE", borderRadius: 18 },
+  navIcon: { color: "#40493D", fontSize: 18 },
+  navIconActive: { color: "#0D631B", fontSize: 18, fontWeight: "900" },
+  navLabel: { color: "#40493D", fontSize: 9, marginTop: 3 },
+  navLabelActive: { color: "#0D631B", fontSize: 9, fontWeight: "700", marginTop: 3 },
   chatHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -776,44 +878,49 @@ const styles = StyleSheet.create({
   back: { fontSize: 38, color: "#101828", lineHeight: 38, width: 36 },
   chatTitle: { color: "#101828", fontWeight: "800", fontSize: 16 },
   online: { color: "#12B76A", fontSize: 11, marginTop: 2 },
-  finishButton: { marginLeft: "auto", backgroundColor: "#DCFCE7", borderRadius: 14, paddingHorizontal: 14, paddingVertical: 9 },
-  finishText: { color: "#15803D", fontWeight: "800" },
+  finishButton: { marginLeft: "auto", backgroundColor: "#0D631B", borderRadius: 999, paddingHorizontal: 20, paddingVertical: 11 },
+  finishText: { color: "#FFFFFF", fontWeight: "800" },
   messages: { flex: 1 },
   messagesContent: { padding: 18, paddingBottom: 28 },
-  coachNote: { alignSelf: "center", backgroundColor: "#FFF7E8", borderRadius: 14, paddingHorizontal: 13, paddingVertical: 8, marginBottom: 20 },
-  coachNoteText: { color: "#7A4D00", fontSize: 12 },
+  coachNote: { alignSelf: "center", backgroundColor: "#E8F5E9", borderRadius: 999, paddingHorizontal: 14, paddingVertical: 9, marginBottom: 20 },
+  coachNoteText: { color: "#0D631B", fontSize: 12 },
   messageRow: { flexDirection: "row", alignItems: "flex-end", marginBottom: 16 },
   userMessageRow: { justifyContent: "flex-end" },
   avatar: { width: 31, height: 31, borderRadius: 11, backgroundColor: "#DCFCE7", alignItems: "center", justifyContent: "center", marginRight: 8 },
-  bubble: { maxWidth: "79%", borderRadius: 20, paddingHorizontal: 16, paddingVertical: 12 },
+  bubble: { maxWidth: "82%", borderRadius: 24, paddingHorizontal: 18, paddingVertical: 16 },
   aiBubble: { backgroundColor: "#FFFFFF", borderBottomLeftRadius: 6, borderWidth: 1, borderColor: "#EAECF0" },
-  userBubble: { backgroundColor: "#16A34A", borderBottomRightRadius: 6 },
+  userBubble: { backgroundColor: "#E8F5E9", borderBottomRightRadius: 6 },
   messageText: { color: "#1D2939", fontSize: 15, lineHeight: 22 },
-  userMessageText: { color: "#FFFFFF" },
+  userMessageText: { color: "#191C1B" },
   listen: { marginTop: 8, alignSelf: "flex-start" },
   listenText: { color: "#15803D", fontSize: 11, fontWeight: "700" },
   typing: { flexDirection: "row", alignItems: "center", marginLeft: 40, gap: 7 },
   typingText: { color: "#667085", fontSize: 12 },
   composer: { flexDirection: "row", alignItems: "flex-end", backgroundColor: "#FFFFFF", paddingHorizontal: 14, paddingTop: 12, borderTopWidth: 1, borderTopColor: "#EAECF0" },
-  input: { flex: 1, minHeight: 47, maxHeight: 110, backgroundColor: "#F6F7FB", borderRadius: 18, paddingHorizontal: 15, paddingVertical: 13, color: "#101828", fontSize: 14 },
-  sendButton: { width: 45, height: 45, borderRadius: 16, backgroundColor: "#16A34A", alignItems: "center", justifyContent: "center", marginLeft: 9 },
+  input: { flex: 1, minHeight: 50, maxHeight: 110, backgroundColor: "#FFFFFF", borderRadius: 999, borderWidth: 1, borderColor: "#BFCABA", paddingHorizontal: 18, paddingVertical: 13, color: "#191C1B", fontSize: 14 },
+  sendButton: { width: 45, height: 45, borderRadius: 23, backgroundColor: "#0D631B", alignItems: "center", justifyContent: "center", marginLeft: 9 },
   sendText: { color: "#FFFFFF", fontSize: 25, fontWeight: "700", marginTop: -2 },
-  micButton: { width: 45, height: 45, borderRadius: 16, backgroundColor: "#DCFCE7", alignItems: "center", justifyContent: "center", marginLeft: 9 },
+  micButton: { width: 50, height: 50, borderRadius: 25, backgroundColor: "#2E7D32", alignItems: "center", justifyContent: "center", marginLeft: 9 },
   micButtonActive: { backgroundColor: "#FEE4E2", borderWidth: 1, borderColor: "#FDA29B" },
   micText: { fontSize: 19, color: "#D92D20", fontWeight: "800" },
   disabled: { opacity: 0.4 },
   voiceHint: { backgroundColor: "#FFFFFF", textAlign: "center", color: "#98A2B3", fontSize: 10, paddingTop: 6, paddingBottom: 9 },
   listeningHint: { color: "#D92D20", fontWeight: "700" },
   feedbackPage: { padding: 22, paddingBottom: 48 },
-  feedbackEyebrow: { textAlign: "center", color: "#16A34A", fontSize: 11, fontWeight: "900", letterSpacing: 1.4, marginTop: 10 },
-  feedbackTitle: { textAlign: "center", color: "#101828", fontSize: 32, fontWeight: "900", marginTop: 8 },
-  feedbackSubtitle: { textAlign: "center", color: "#667085", marginTop: 5, marginBottom: 22 },
-  scoreCard: { flexDirection: "row", backgroundColor: "#14532D", borderRadius: 24, paddingVertical: 22, marginBottom: 16 },
-  scoreItem: { flex: 1, alignItems: "center", borderRightWidth: 1, borderRightColor: "#166534" },
-  score: { color: "#FFFFFF", fontSize: 28, fontWeight: "900" },
-  scoreLabel: { color: "#98A2B3", fontSize: 10, marginTop: 3 },
-  insightCard: { backgroundColor: "#DCFCE7", borderRadius: 20, padding: 19, marginBottom: 24 },
-  cardLabel: { color: "#15803D", fontSize: 10, fontWeight: "900", letterSpacing: 1 },
+  celebrationIcon: { width: 78, height: 78, borderRadius: 39, backgroundColor: "#88D982", alignSelf: "center", alignItems: "center", justifyContent: "center", marginTop: 20 },
+  celebrationEmoji: { fontSize: 31 },
+  feedbackEyebrow: { textAlign: "center", color: "#0D631B", fontSize: 11, fontWeight: "900", letterSpacing: 1.4, marginTop: 10 },
+  feedbackTitle: { textAlign: "center", color: "#0D631B", fontSize: 34, fontWeight: "900", marginTop: 20 },
+  feedbackSubtitle: { textAlign: "center", color: "#40493D", lineHeight: 22, marginTop: 8, marginBottom: 34, paddingHorizontal: 12 },
+  scoreCard: { backgroundColor: "#FFFFFF", borderRadius: 24, padding: 24, marginBottom: 18, borderWidth: 1, borderColor: "#F1F4F1" },
+  performanceTitle: { color: "#191C1B", fontSize: 20, fontWeight: "900", marginBottom: 18 },
+  scoreItem: { alignItems: "center", marginBottom: 24 },
+  scoreCircle: { width: 92, height: 92, borderRadius: 46, borderWidth: 8, borderColor: "#0D631B", borderLeftColor: "#E6E9E7", alignItems: "center", justifyContent: "center" },
+  score: { color: "#0D631B", fontSize: 20, fontWeight: "900" },
+  scoreLabel: { color: "#40493D", fontSize: 12, marginTop: 10 },
+  scoreGain: { color: "#0D631B", fontSize: 10, marginTop: 3 },
+  insightCard: { backgroundColor: "#E8F5E9", borderRadius: 24, padding: 24, marginBottom: 24, borderWidth: 1, borderColor: "#BDEFBE" },
+  cardLabel: { color: "#0D631B", fontSize: 20, textAlign: "center", fontWeight: "800" },
   summary: { color: "#344054", fontSize: 14, lineHeight: 22, marginTop: 8 },
   feedbackSectionTitle: { color: "#101828", fontSize: 18, fontWeight: "800", marginBottom: 11, marginTop: 6 },
   correctionCard: { backgroundColor: "#FFFFFF", borderRadius: 18, padding: 17, marginBottom: 20, borderWidth: 1, borderColor: "#EAECF0" },
@@ -830,19 +937,19 @@ const styles = StyleSheet.create({
   flashcardDone: { color: "#16A34A", fontSize: 15, fontWeight: "800" },
   flashcardCounter: { color: "#667085", fontSize: 13, textAlign: "center", marginTop: 34 },
   flashcardProgress: { height: 7, borderRadius: 5, backgroundColor: "#E4E7EC", marginTop: 10, overflow: "hidden" },
-  flashcardProgressFill: { height: "100%", borderRadius: 5, backgroundColor: "#16A34A" },
-  studyCard: { flex: 1, maxHeight: 430, minHeight: 330, backgroundColor: "#16A34A", borderRadius: 30, marginTop: 32, padding: 28, alignItems: "center", justifyContent: "center" },
-  studyCardFlipped: { backgroundColor: "#22C55E" },
-  studyCardSide: { position: "absolute", top: 25, color: "#BBF7D0", fontSize: 11, fontWeight: "900", letterSpacing: 1.4 },
-  studyWord: { color: "#FFFFFF", fontSize: 38, fontWeight: "900", textAlign: "center" },
-  studyMeaning: { color: "#FFFFFF", fontSize: 31, fontWeight: "900", textAlign: "center" },
-  studyExample: { color: "#F0FDF4", fontSize: 16, lineHeight: 24, fontStyle: "italic", textAlign: "center", marginTop: 22 },
-  studyHint: { position: "absolute", bottom: 25, color: "#D0D5DD", fontSize: 11 },
+  flashcardProgressFill: { height: "100%", borderRadius: 5, backgroundColor: "#0D631B" },
+  studyCard: { flex: 1, maxHeight: 430, minHeight: 330, backgroundColor: "#E8F5E9", borderRadius: 30, marginTop: 32, padding: 28, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: "#D9E6DA" },
+  studyCardFlipped: { backgroundColor: "#F2F4F2" },
+  studyCardSide: { position: "absolute", top: 25, color: "#0D631B", backgroundColor: "#BDEFBE", borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6, fontSize: 11, fontWeight: "900", letterSpacing: 1.4 },
+  studyWord: { color: "#0D631B", fontSize: 38, fontWeight: "900", textAlign: "center" },
+  studyMeaning: { color: "#0D631B", fontSize: 31, fontWeight: "900", textAlign: "center" },
+  studyExample: { color: "#40493D", fontSize: 16, lineHeight: 24, fontStyle: "italic", textAlign: "center", marginTop: 22 },
+  studyHint: { position: "absolute", bottom: 25, color: "#707A6C", fontSize: 11 },
   flashcardControls: { flexDirection: "row", justifyContent: "center", gap: 18, marginTop: 28 },
   arrowButton: { width: 66, height: 58, borderRadius: 20, backgroundColor: "#FFFFFF", borderWidth: 1, borderColor: "#D0D5DD", alignItems: "center", justifyContent: "center" },
-  arrowButtonPrimary: { backgroundColor: "#16A34A", borderColor: "#16A34A" },
+  arrowButtonPrimary: { backgroundColor: "#0D631B", borderColor: "#0D631B" },
   arrowButtonText: { color: "#101828", fontSize: 27, fontWeight: "800" },
   arrowButtonPrimaryText: { color: "#FFFFFF", fontSize: 27, fontWeight: "800" },
-  primaryButton: { backgroundColor: "#16A34A", borderRadius: 17, paddingVertical: 16, alignItems: "center", marginTop: 16 },
+  primaryButton: { backgroundColor: "#0D631B", borderRadius: 999, paddingVertical: 16, alignItems: "center", marginTop: 16 },
   primaryButtonText: { color: "#FFFFFF", fontWeight: "800", fontSize: 15 },
 });

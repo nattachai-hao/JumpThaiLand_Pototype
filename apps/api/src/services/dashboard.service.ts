@@ -1,9 +1,9 @@
 import { ConversationStatus } from "../generated/prisma/enums.js";
 import { prisma } from "../lib/prisma.js";
-import { scenarios } from "../scenarios.js";
 import { getBangkokDateKey, getBangkokDayBounds } from "../utils/date.js";
 
 const DAILY_REWARD_POINTS = 10;
+const DAILY_GOAL_SCENARIOS = 3;
 
 export interface DashboardSummary {
   completedToday: number;
@@ -33,8 +33,8 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
       select: { id: true },
     }),
   ]);
-  const totalScenarios = Object.keys(scenarios).length;
-  const completedToday = completedScenarios.length;
+  const totalScenarios = DAILY_GOAL_SCENARIOS;
+  const completedToday = Math.min(completedScenarios.length, totalScenarios);
 
   return {
     completedToday,
@@ -43,12 +43,12 @@ export async function getDashboardSummary(): Promise<DashboardSummary> {
     ),
     totalScenarios,
     remainingToday: Math.max(totalScenarios - completedToday, 0),
-    progressPercent:
-      totalScenarios === 0
-        ? 0
-        : Math.min(Math.round((completedToday / totalScenarios) * 100), 100),
+    progressPercent: Math.min(
+      Math.round((completedToday / totalScenarios) * 100),
+      100,
+    ),
     points: pointsAggregate._sum.points ?? 0,
-    canClaimPoints: completedToday === totalScenarios && !todayReward,
+    canClaimPoints: completedToday >= totalScenarios && !todayReward,
   };
 }
 

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JUMP English Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#0d631b",
+                    "on-surface": "#191c1b",
+                    "tertiary": "#4d5950",
+                    "surface-variant": "#e1e3e1",
+                    "outline-variant": "#bfcaba",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#a3f69c",
+                    "inverse-on-surface": "#eff1ef",
+                    "on-tertiary-container": "#e8f5e9",
+                    "outline": "#707a6c",
+                    "tertiary-container": "#657167",
+                    "tertiary-fixed": "#d9e6da",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e1e3e1",
+                    "on-tertiary-fixed": "#131e17",
+                    "surface-container": "#eceeec",
+                    "on-secondary-fixed": "#002109",
+                    "secondary": "#3c6842",
+                    "tertiary-fixed-dim": "#bdcabe",
+                    "surface-dim": "#d8dad9",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#1b6d24",
+                    "inverse-surface": "#2e3130",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed": "#002204",
+                    "on-surface-variant": "#40493d",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#24502c",
+                    "surface-bright": "#f8faf8",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#426e47",
+                    "primary-fixed-dim": "#88d982",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#bdefbe",
+                    "on-primary-container": "#cbffc2",
+                    "surface": "#f8faf8",
+                    "on-background": "#191c1b",
+                    "on-primary-fixed-variant": "#005312",
+                    "surface-container-low": "#f2f4f2",
+                    "secondary-fixed-dim": "#a2d3a4",
+                    "surface-container-high": "#e6e9e7",
+                    "secondary-fixed": "#bdefbe",
+                    "background": "#f8faf8",
+                    "on-tertiary-fixed-variant": "#3e4a41",
+                    "inverse-primary": "#88d982",
+                    "primary-container": "#2e7d32"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "desktop-max-width": "1280px",
+                    "gutter": "24px",
+                    "container-margin": "24px",
+                    "base": "8px",
+                    "section-gap": "64px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-lg": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "label-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8faf8;
+            color: #191c1b;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 30px 60px -15px rgba(46, 125, 50, 0.08);
+            border-radius: 24px;
+        }
+
+        .ambient-glow {
+            box-shadow: 0 10px 40px -10px rgba(46, 125, 50, 0.12);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Progress Ring Animation */
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.5s ease-in-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-[20px] border-b border-white/40 shadow-[0_30px_60px_-15px_rgba(46,125,50,0.08)]">
+<div class="flex justify-between items-center h-16 px-gutter max-w-screen-desktop-max-width mx-auto w-full">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-headline-md">school</span>
+<h1 class="text-headline-md font-headline-md font-bold text-primary tracking-tight">JUMP English</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 mr-8">
+<a class="text-primary font-label-md text-label-md hover:bg-primary/5 px-3 py-2 rounded-lg transition-colors" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-primary/5 px-3 py-2 rounded-lg transition-colors" href="#">Lessons</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-primary/5 px-3 py-2 rounded-lg transition-colors" href="#">Tutor</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-primary/5 px-3 py-2 rounded-lg transition-colors" href="#">Flashcards</a>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-4 py-2 rounded-full font-label-md text-label-md active:scale-95 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+                    1,250 pts
+                </button>
+</div>
+</div>
+</header>
+<main class="pt-24 px-gutter max-w-screen-desktop-max-width mx-auto">
+<!-- Welcome Section -->
+<section class="mb-section-gap">
+<h2 class="text-headline-xl font-headline-xl mb-2 text-on-surface">Hello, Alex!</h2>
+<p class="text-body-lg font-body-lg text-outline">You're making great progress. Ready to jump in?</p>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-section-gap">
+<!-- Daily Goal Progress Card -->
+<div class="md:col-span-5 glass-card p-8 flex flex-col items-center justify-center text-center">
+<h3 class="text-headline-md font-headline-md mb-8">Daily Goal</h3>
+<div class="relative w-48 h-48 mb-6">
+<svg class="w-full h-full">
+<circle class="text-surface-container stroke-current" cx="96" cy="96" fill="transparent" r="80" stroke-width="12"></circle>
+<circle class="text-primary stroke-current progress-ring__circle" cx="96" cy="96" fill="transparent" r="80" stroke-linecap="round" stroke-width="12" style="stroke-dasharray: 502.65; stroke-dashoffset: 335.1;"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-headline-xl font-headline-xl text-primary">1/3</span>
+<span class="text-label-md font-label-md text-outline">Topics</span>
+</div>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant">2 more topics to hit your daily streak!</p>
+<button class="mt-8 w-full bg-primary text-on-primary py-4 rounded-full font-label-md text-label-md active:scale-95 transition-transform shadow-lg shadow-primary/20">
+                    Continue Learning
+                </button>
+</div>
+<!-- Streaks & Stats Column -->
+<div class="md:col-span-7 flex flex-col gap-8">
+<!-- Horizontal Streak Scroll -->
+<div class="glass-card p-8">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-label-md font-label-md text-outline uppercase tracking-wider">Weekly Streak</h3>
+<span class="flex items-center gap-1 text-primary font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+                            12 Days
+                        </span>
+</div>
+<div class="flex justify-between overflow-x-auto no-scrollbar gap-4 py-2">
+<!-- Monday -->
+<div class="flex flex-col items-center min-w-[56px]">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Mon</span>
+</div>
+<!-- Tuesday -->
+<div class="flex flex-col items-center min-w-[56px]">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-[20px]">check</span>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Tue</span>
+</div>
+<!-- Wednesday (Active) -->
+<div class="flex flex-col items-center min-w-[56px]">
+<div class="w-12 h-12 rounded-full border-2 border-primary border-dashed flex items-center justify-center mb-1 bg-primary/5">
+<span class="text-primary font-bold">1/3</span>
+</div>
+<span class="text-label-sm font-label-sm text-primary font-bold">Today</span>
+</div>
+<!-- Thursday -->
+<div class="flex flex-col items-center min-w-[56px]">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center mb-2"></div>
+<span class="text-label-sm font-label-sm text-outline">Thu</span>
+</div>
+<!-- Friday -->
+<div class="flex flex-col items-center min-w-[56px]">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center mb-2"></div>
+<span class="text-label-sm font-label-sm text-outline">Fri</span>
+</div>
+<!-- Saturday -->
+<div class="flex flex-col items-center min-w-[56px]">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center mb-2"></div>
+<span class="text-label-sm font-label-sm text-outline">Sat</span>
+</div>
+</div>
+</div>
+<!-- Featured Lesson Card -->
+<div class="relative overflow-hidden rounded-[24px] aspect-[16/7] md:aspect-auto md:h-full min-h-[200px]">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A cinematic, high-definition photograph of a modern airport terminal at dusk with soft golden light streaming through floor-to-ceiling windows. The scene is airy and sophisticated with a clean, light-mode UI color palette of whites and soft greens. People in professional attire move through the space, creating a sense of dynamic energy. The overall mood is optimistic and focused on global connectivity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDbnOYz0lUGaLf8FXf6apOL6bDzE3R94lYtZdO_qeui26i3th6TIuiCy_17vcKBwoGn2mZncaMa6Z8KQTYFJBXkG_eQumP1DOnfS1NhFNOF9MqIcS8T-i5tg9XMjBVZLXKeZuXfaCgdZz-RJ5qFGYsqnyRh4BLzP4GQ4x29K-qZEUTc8O3z7h-QdA4gonFrN8mKIPSbTqy1PK5xq-0bVEwTX3z7YdsKatQ7IasCHPmUiRWoB7fQWJL55Q')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent flex flex-col justify-center p-8">
+<span class="bg-white/20 backdrop-blur-md text-white text-label-sm font-label-sm px-3 py-1 rounded-full w-fit mb-4">RECOMMENDED</span>
+<h4 class="text-headline-md font-headline-md text-white mb-2">Business Presentation</h4>
+<p class="text-white/80 text-body-md font-body-md max-w-[60%]">Master the art of pitching your ideas in professional English.</p>
+<button class="mt-6 flex items-center gap-2 text-white font-label-md text-label-md group">
+                            Start Lesson 
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Scenarios to Practice Section -->
+<section class="pb-16">
+<div class="flex justify-between items-center mb-8">
+<h3 class="text-headline-md font-headline-md text-on-surface">Scenarios to Practice</h3>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline">
+                    View All Scenarios
+                    <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Airport -->
+<div class="glass-card p-6 flex items-center gap-5 hover:scale-[1.02] transition-transform cursor-pointer group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container ambient-glow">
+<span class="material-symbols-outlined text-3xl">flight_takeoff</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface mb-1 group-hover:text-primary transition-colors">Airport check-in</h4>
+<p class="text-label-sm font-label-sm text-outline">15 min • Intermediate</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Card 2: Interview -->
+<div class="glass-card p-6 flex items-center gap-5 hover:scale-[1.02] transition-transform cursor-pointer group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container ambient-glow">
+<span class="material-symbols-outlined text-3xl">work</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface mb-1 group-hover:text-primary transition-colors">Job interview</h4>
+<p class="text-label-sm font-label-sm text-outline">20 min • Advanced</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Card 3: Restaurant -->
+<div class="glass-card p-6 flex items-center gap-5 hover:scale-[1.02] transition-transform cursor-pointer group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container ambient-glow">
+<span class="material-symbols-outlined text-3xl">restaurant</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface mb-1 group-hover:text-primary transition-colors">Ordering Dinner</h4>
+<p class="text-label-sm font-label-sm text-outline">10 min • Beginner</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Card 4: Meeting -->
+<div class="glass-card p-6 flex items-center gap-5 hover:scale-[1.02] transition-transform cursor-pointer group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container ambient-glow">
+<span class="material-symbols-outlined text-3xl">groups</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface mb-1 group-hover:text-primary transition-colors">Project Meeting</h4>
+<p class="text-label-sm font-label-sm text-outline">25 min • Advanced</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Card 5: Directions -->
+<div class="glass-card p-6 flex items-center gap-5 hover:scale-[1.02] transition-transform cursor-pointer group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container ambient-glow">
+<span class="material-symbols-outlined text-3xl">map</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface mb-1 group-hover:text-primary transition-colors">Asking Directions</h4>
+<p class="text-label-sm font-label-sm text-outline">12 min • Intermediate</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+<!-- Card 6: Small Talk -->
+<div class="glass-card p-6 flex items-center gap-5 hover:scale-[1.02] transition-transform cursor-pointer group">
+<div class="w-16 h-16 rounded-2xl bg-secondary-container flex items-center justify-center text-on-secondary-container ambient-glow">
+<span class="material-symbols-outlined text-3xl">forum</span>
+</div>
+<div>
+<h4 class="text-label-md font-label-md text-on-surface mb-1 group-hover:text-primary transition-colors">Coffee Shop Talk</h4>
+<p class="text-label-sm font-label-sm text-outline">8 min • Beginner</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-outline group-hover:text-primary transition-colors">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 bg-white/85 backdrop-blur-[20px] rounded-t-xl border-t border-white/40 shadow-[0_-10px_40px_-15px_rgba(46,125,50,0.08)] md:hidden">
+<div class="flex justify-around items-center h-20 pb-safe w-full">
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-sm font-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="text-label-sm font-label-sm">Lessons</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">record_voice_over</span>
+<span class="text-label-sm font-label-sm">Tutor</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">style</span>
+<span class="text-label-sm font-label-sm">Flashcards</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interaction: Update progress ring on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const circle = document.querySelector('.progress-ring__circle');
+            const radius = circle.r.baseVal.value;
+            const circumference = radius * 2 * Math.PI;
+            
+            circle.style.strokeDasharray = `${circumference} ${circumference}`;
+            
+            function setProgress(percent) {
+                const offset = circumference - (percent / 100 * circumference);
+                circle.style.strokeDashoffset = offset;
+            }
+
+            // Animate to 33% (1 out of 3 topics)
+            setTimeout(() => setProgress(33), 500);
+        });
+
+        // Simple parallax or float effect for glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 25;
+                const rotateY = (centerX - x) / 25;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)`;
+            });
+        });
+    </script>
+</body></html>

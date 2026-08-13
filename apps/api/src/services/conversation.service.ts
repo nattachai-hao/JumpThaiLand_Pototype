@@ -23,12 +23,18 @@ const scenarioToDatabase: Record<ScenarioId, Scenario> = {
   cafe: Scenario.CAFE,
   travel: Scenario.TRAVEL,
   interview: Scenario.INTERVIEW,
+  dinner: Scenario.DINNER,
+  meeting: Scenario.MEETING,
+  directions: Scenario.DIRECTIONS,
 };
 
 const scenarioFromDatabase: Record<Scenario, ScenarioId> = {
   [Scenario.CAFE]: "cafe",
   [Scenario.TRAVEL]: "travel",
   [Scenario.INTERVIEW]: "interview",
+  [Scenario.DINNER]: "dinner",
+  [Scenario.MEETING]: "meeting",
+  [Scenario.DIRECTIONS]: "directions",
 };
 
 function mapMessage(message: {

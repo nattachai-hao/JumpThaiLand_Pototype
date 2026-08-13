@@ -1,4 +1,10 @@
-export type ScenarioId = "cafe" | "travel" | "interview";
+export type ScenarioId =
+  | "cafe"
+  | "travel"
+  | "interview"
+  | "dinner"
+  | "meeting"
+  | "directions";
 export type MessageRole = "user" | "assistant";
 
 export interface ConversationMessage {

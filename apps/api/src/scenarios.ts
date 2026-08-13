@@ -19,6 +19,21 @@ export const scenarios: Record<
     aiRole: "a supportive interviewer for a junior software role",
     opening: "Thanks for joining us today. Could you start by telling me a little about yourself?",
   },
+  dinner: {
+    title: "Ordering dinner",
+    aiRole: "a welcoming restaurant server",
+    opening: "Good evening! Welcome to Green Table. Are you ready to order, or would you like a few more minutes?",
+  },
+  meeting: {
+    title: "Project meeting",
+    aiRole: "a friendly project manager leading a team meeting",
+    opening: "Hi everyone. Let's begin with a quick update. Could you tell me what you worked on this week?",
+  },
+  directions: {
+    title: "Asking directions",
+    aiRole: "a helpful local giving directions around the city",
+    opening: "Hi there! You look a little lost. Where are you trying to go?",
+  },
 };
 
 export function isScenario(value: unknown): value is ScenarioId {
