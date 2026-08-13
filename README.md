@@ -4,10 +4,7 @@
 
 ## ฟีเจอร์หลัก
 
-- ฝึกสนทนา 3 สถานการณ์
-  - At the café
-  - Airport check-in
-  - Job interview
+- ฝึกสนทนา สถานการณ์
 - สนทนากับ AI และฟังเสียงประโยคตอบกลับ
 - รองรับ Voice Input บนอุปกรณ์ที่รองรับ Speech Recognition
 - บันทึกบทสนทนา ข้อความ Feedback และ Flashcards ลง PostgreSQL
